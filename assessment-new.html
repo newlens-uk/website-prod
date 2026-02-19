@@ -538,7 +538,7 @@
             // Special handling for Q4: show Q4b if answer is "yes"
             if (currentStep === 5) {
                 const q4Answer = document.querySelector('input[name="q4_policy"]:checked');
-                if (q4Answer && q4Answer.value === 'yes') {
+                if (q4Answer && q4Answer.value === 'yes' || q4Answer.value === 'working-on-it') {
                     // Show Q4b
                     document.getElementById('step5b').style.display = 'block';
                     document.getElementById('step5b').classList.add('active');
@@ -583,7 +583,7 @@
                 // Special handling when going back to step 5 from step 6
                 if (currentStep === 5) {
                     const q4Answer = document.querySelector('input[name="q4_policy"]:checked');
-                    if (q4Answer && q4Answer.value === 'yes') {
+                    if (q4Answer && q4Answer.value === 'yes' || q4Answer.value === 'working-on-it') {
                         // Show Q4b instead of step 5
                         document.getElementById('step5b').style.display = 'block';
                         document.getElementById('step5b').classList.add('active');
