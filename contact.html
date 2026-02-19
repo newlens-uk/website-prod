@@ -33,13 +33,16 @@
             margin-bottom: 1.5rem;
         }
         .form-input, .form-textarea, .form-select {
-            @apply w-full px-5 py-4 rounded-2xl border-2 border-slate-100 outline-none transition-all bg-slate-50/50 text-slate-900;
+            @apply w-full px-5 py-4 rounded-xl border-2 border-slate-200 outline-none transition-all bg-white text-slate-900;
         }
         .form-input:focus, .form-textarea:focus, .form-select:focus {
-            @apply border-nl-teal bg-white ring-4 ring-nl-teal/5;
+            @apply border-nl-teal ring-4 ring-nl-teal/10 shadow-sm;
         }
         .form-label {
-            @apply block text-[11px] font-black text-nl-navy mb-2 uppercase tracking-[0.2em] ml-1;
+            @apply block text-xs font-bold text-nl-navy mb-2 uppercase tracking-wider ml-1;
+        }
+        .required-star {
+            @apply text-red-500 ml-0.5;
         }
         .error-message {
             @apply text-red-500 text-[10px] font-bold uppercase tracking-wider mt-1 ml-1 hidden;
@@ -82,19 +85,19 @@
         <div class="max-w-2xl mx-auto px-6">
             <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-slate-100">
                 
-                <form id="contactForm" class="space-y-4">
+                <form id="contactForm" class="space-y-6">
                     
                     <!-- Name -->
                     <div class="form-group">
-                        <label for="name" class="form-label">Full Name *</label>
+                        <label for="name" class="form-label">Full Name <span class="required-star">*</span></label>
                         <input type="text" id="name" name="name" required class="form-input" placeholder="e.g. John Smith">
                         <span class="error-message" id="nameError">Required</span>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid md:grid-cols-2 gap-6">
                         <!-- Email -->
                         <div class="form-group">
-                            <label for="email" class="form-label">Work Email *</label>
+                            <label for="email" class="form-label">Work Email <span class="required-star">*</span></label>
                             <input type="email" id="email" name="email" required class="form-input" placeholder="john@company.com">
                             <span class="error-message" id="emailError">Required</span>
                         </div>
@@ -114,7 +117,7 @@
 
                     <!-- Enquiry Type -->
                     <div class="form-group">
-                        <label for="enquiry_type" class="form-label">How can we help? *</label>
+                        <label for="enquiry_type" class="form-label">How can we help? <span class="required-star">*</span></label>
                         <select id="enquiry_type" name="enquiry_type" required class="form-select">
                             <option value="">Select an option...</option>
                             <option value="general">General Enquiry</option>
@@ -128,7 +131,7 @@
                     </div>
 
                     <!-- Consulting-specific fields (hidden by default) -->
-                    <div id="consultingFields" class="hidden space-y-4">
+                    <div id="consultingFields" class="hidden space-y-6">
                         <div class="form-group">
                             <label for="consulting_interest" class="form-label">Consulting Interest</label>
                             <select id="consulting_interest" name="consulting_interest" class="form-select">
@@ -144,8 +147,8 @@
                     </div>
 
                     <!-- Training-specific fields (hidden by default) -->
-                    <div id="trainingFields" class="hidden space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
+                    <div id="trainingFields" class="hidden space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
                             <div class="form-group">
                                 <label for="training_interest" class="form-label">Training Interest</label>
                                 <select id="training_interest" name="training_interest" class="form-select">
@@ -170,12 +173,12 @@
 
                     <!-- Message -->
                     <div class="form-group">
-                        <label for="message" class="form-label">Your Message *</label>
+                        <label for="message" class="form-label">Your Message <span class="required-star">*</span></label>
                         <textarea id="message" name="message" required rows="5" class="form-textarea" placeholder="Briefly describe your enquiry..."></textarea>
                         <span class="error-message" id="messageError">Required</span>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-4 items-end">
+                    <div class="grid md:grid-cols-2 gap-6 items-end">
                         <!-- Preferred Contact Method -->
                         <div class="form-group">
                             <label for="contact_method" class="form-label">Preferred Contact Method</label>
@@ -188,11 +191,12 @@
 
                         <!-- Submit Button -->
                         <div class="form-group">
-                            <button type="submit" id="submitBtn" class="w-full bg-nl-green text-nl-navy h-[58px] rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-nl-navy hover:text-white transition-all shadow-lg flex items-center justify-center gap-3">
+                            <button type="submit" id="submitBtn" class="w-full bg-nl-green text-nl-navy h-[60px] rounded-xl font-black text-sm uppercase tracking-widest hover:bg-nl-navy hover:text-white transition-all shadow-lg flex items-center justify-center gap-3">
                                 <span id="submitText">Send Enquiry</span>
                                 <div id="submitSpinner" class="spinner hidden"></div>
                             </button>
                         </div>
+                    </div>
                     </div>
 
                     <!-- Privacy Notice -->
