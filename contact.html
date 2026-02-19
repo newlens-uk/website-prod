@@ -28,14 +28,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
         .form-input, .form-textarea, .form-select {
-            @apply w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-nl-teal focus:ring-2 focus:ring-nl-teal/20 outline-none transition-all bg-white text-slate-800;
+            @apply w-full px-5 py-4 rounded-2xl border-2 border-slate-100 outline-none transition-all bg-slate-50/50 text-slate-900;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            @apply border-nl-teal bg-white ring-4 ring-nl-teal/5;
         }
         .form-label {
-            @apply block text-sm font-bold text-nl-navy mb-2 uppercase tracking-wider;
+            @apply block text-[11px] font-black text-nl-navy mb-2 uppercase tracking-[0.2em] ml-1;
         }
         .error-message {
-            @apply text-red-500 text-xs mt-1 hidden;
+            @apply text-red-500 text-[10px] font-bold uppercase tracking-wider mt-1 ml-1 hidden;
         }
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.3);
@@ -75,39 +82,41 @@
         <div class="max-w-2xl mx-auto px-6">
             <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-slate-100">
                 
-                <form id="contactForm" class="space-y-6">
+                <form id="contactForm" class="space-y-4">
                     
                     <!-- Name -->
-                    <div>
-                        <label for="name" class="form-label">Name *</label>
-                        <input type="text" id="name" name="name" required class="form-input" placeholder="Your full name">
-                        <span class="error-message" id="nameError">Please enter your name</span>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name *</label>
+                        <input type="text" id="name" name="name" required class="form-input" placeholder="e.g. John Smith">
+                        <span class="error-message" id="nameError">Required</span>
                     </div>
 
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" name="email" required class="form-input" placeholder="you@company.com">
-                        <span class="error-message" id="emailError">Please enter a valid email</span>
-                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">Work Email *</label>
+                            <input type="email" id="email" name="email" required class="form-input" placeholder="john@company.com">
+                            <span class="error-message" id="emailError">Required</span>
+                        </div>
 
-                    <!-- Phone -->
-                    <div>
-                        <label for="phone" class="form-label">Phone (Optional)</label>
-                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="+44 7XXX XXXXXX">
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+44 ...">
+                        </div>
                     </div>
 
                     <!-- Company -->
-                    <div>
+                    <div class="form-group">
                         <label for="company" class="form-label">Company Name (Optional)</label>
-                        <input type="text" id="company" name="company" class="form-input" placeholder="Your company">
+                        <input type="text" id="company" name="company" class="form-input" placeholder="Your Business Ltd">
                     </div>
 
                     <!-- Enquiry Type -->
-                    <div>
-                        <label for="enquiry_type" class="form-label">Enquiry Type *</label>
+                    <div class="form-group">
+                        <label for="enquiry_type" class="form-label">How can we help? *</label>
                         <select id="enquiry_type" name="enquiry_type" required class="form-select">
-                            <option value="">Select...</option>
+                            <option value="">Select an option...</option>
                             <option value="general">General Enquiry</option>
                             <option value="consulting">Consulting</option>
                             <option value="training">Training</option>
@@ -115,15 +124,15 @@
                             <option value="assessment">Assessment Booking</option>
                             <option value="other">Other</option>
                         </select>
-                        <span class="error-message" id="enquiryError">Please select an enquiry type</span>
+                        <span class="error-message" id="enquiryError">Required</span>
                     </div>
 
                     <!-- Consulting-specific fields (hidden by default) -->
-                    <div id="consultingFields" class="hidden space-y-6">
-                        <div>
+                    <div id="consultingFields" class="hidden space-y-4">
+                        <div class="form-group">
                             <label for="consulting_interest" class="form-label">Consulting Interest</label>
                             <select id="consulting_interest" name="consulting_interest" class="form-select">
-                                <option value="">Select...</option>
+                                <option value="">Select a focus area...</option>
                                 <option value="systems">Systems Architecture</option>
                                 <option value="analytics">Analytics & Reporting</option>
                                 <option value="financial">Commercial & Financial</option>
@@ -135,62 +144,68 @@
                     </div>
 
                     <!-- Training-specific fields (hidden by default) -->
-                    <div id="trainingFields" class="hidden space-y-6">
-                        <div>
-                            <label for="training_interest" class="form-label">Training Interest</label>
-                            <select id="training_interest" name="training_interest" class="form-select">
-                                <option value="">Select...</option>
-                                <option value="empowerment">AI Empowerment (team workshops)</option>
-                                <option value="solutions">AI Solutions (technical training)</option>
-                                <option value="both">Both</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="attendees" class="form-label">Number of Attendees</label>
-                            <select id="attendees" name="attendees" class="form-select">
-                                <option value="">Select...</option>
-                                <option value="1-5">1-5</option>
-                                <option value="6-10">6-10</option>
-                                <option value="11-20">11-20</option>
-                                <option value="21+">21+</option>
-                            </select>
+                    <div id="trainingFields" class="hidden space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label for="training_interest" class="form-label">Training Interest</label>
+                                <select id="training_interest" name="training_interest" class="form-select">
+                                    <option value="">Select...</option>
+                                    <option value="empowerment">AI Empowerment</option>
+                                    <option value="solutions">AI Solutions</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendees" class="form-label">Attendees</label>
+                                <select id="attendees" name="attendees" class="form-select">
+                                    <option value="">Select...</option>
+                                    <option value="1-5">1-5</option>
+                                    <option value="6-10">6-10</option>
+                                    <option value="11-20">11-20</option>
+                                    <option value="21+">21+</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Message -->
-                    <div>
-                        <label for="message" class="form-label">Message *</label>
-                        <textarea id="message" name="message" required rows="6" class="form-textarea" placeholder="Tell us about your needs..."></textarea>
-                        <span class="error-message" id="messageError">Please enter a message</span>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Your Message *</label>
+                        <textarea id="message" name="message" required rows="5" class="form-textarea" placeholder="Briefly describe your enquiry..."></textarea>
+                        <span class="error-message" id="messageError">Required</span>
                     </div>
 
-                    <!-- Preferred Contact Method -->
-                    <div>
-                        <label for="contact_method" class="form-label">Preferred Contact Method</label>
-                        <select id="contact_method" name="contact_method" class="form-select">
-                            <option value="email">Email</option>
-                            <option value="phone">Phone</option>
-                            <option value="video">Video Call</option>
-                        </select>
+                    <div class="grid md:grid-cols-2 gap-4 items-end">
+                        <!-- Preferred Contact Method -->
+                        <div class="form-group">
+                            <label for="contact_method" class="form-label">Preferred Contact Method</label>
+                            <select id="contact_method" name="contact_method" class="form-select">
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                                <option value="video">Video Call</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" id="submitBtn" class="w-full bg-nl-green text-nl-navy h-[58px] rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-nl-navy hover:text-white transition-all shadow-lg flex items-center justify-center gap-3">
+                                <span id="submitText">Send Enquiry</span>
+                                <div id="submitSpinner" class="spinner hidden"></div>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Privacy Notice -->
-                    <div class="bg-slate-50 rounded-xl p-4 text-xs text-slate-600 leading-relaxed">
-                        <strong class="text-slate-800">Privacy:</strong> Your information is secure and used only to respond to your enquiry. 
-                        See our <a href="privacy.html" class="text-nl-teal hover:underline">Privacy Policy</a> for details. UK GDPR compliant.
+                    <div class="bg-slate-50/50 rounded-2xl p-5 text-[10px] text-slate-500 leading-relaxed border border-slate-100">
+                        <strong class="text-nl-navy uppercase tracking-widest mr-1">Privacy:</strong> Your information is secure and used only to respond to your enquiry. 
+                        See our <a href="privacy.html" class="text-nl-teal hover:underline font-bold">Privacy Policy</a>. UK GDPR compliant.
                     </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" id="submitBtn" class="w-full bg-nl-green text-nl-navy px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-nl-navy hover:text-white transition-all shadow-lg flex items-center justify-center gap-3">
-                        <span id="submitText">Send Enquiry</span>
-                        <div id="submitSpinner" class="spinner hidden"></div>
-                    </button>
 
                     <!-- Success/Error Messages -->
-                    <div id="successMessage" class="hidden bg-nl-green/10 border-2 border-nl-green text-nl-navy p-4 rounded-xl text-sm font-bold text-center">
+                    <div id="successMessage" class="hidden bg-nl-green/10 border-2 border-nl-green text-nl-navy p-6 rounded-2xl text-sm font-bold text-center">
                         ✓ Thank you! We'll be in touch within 24 hours.
                     </div>
-                    <div id="errorMessage" class="hidden bg-red-50 border-2 border-red-300 text-red-700 p-4 rounded-xl text-sm font-bold text-center">
+                    <div id="errorMessage" class="hidden bg-red-50 border-2 border-red-200 text-red-700 p-6 rounded-2xl text-sm font-bold text-center">
                         Something went wrong. Please email us directly at <a href="mailto:info@newlens.uk" class="underline">info@newlens.uk</a>
                     </div>
 
