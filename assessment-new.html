@@ -444,7 +444,7 @@
 
                         <div class="bg-nl-navy p-8 rounded-2xl text-white my-12">
                             <p class="text-xs font-bold uppercase tracking-widest text-nl-green mb-2">Strategic Insight</p>
-                            <p class="text-sm leading-relaxed text-nl-slate">We use these insights to generate your Readiness Score and Risk Profile. Your roadmap is calculated based on these 12 pillars.</p>
+                            <p class="text-sm leading-relaxed text-nl-slate">We use these insights to generate your Readiness Score and Risk Profile. Your roadmap is calculated from your answers across these assessment pillars.</p>
                         </div>
 
                         <!-- Consent Section -->
@@ -462,7 +462,12 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-4">
+                        <!-- Submission Error Message (hidden by default) -->
+                        <div id="submission-error" class="hidden mt-4 p-4 rounded-lg border border-red-300 bg-red-50 text-red-800 text-sm">
+                            Something went wrong submitting your assessment. Please try again, or email us directly at <a href="mailto:info@newlens.uk" class="underline">info@newlens.uk</a>.
+                        </div>
+
+                        <div class="flex gap-4 mt-4">
                             <button type="button" onclick="prevStep()" class="flex-1 bg-slate-200 text-slate-700 h-[64px] rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-slate-300 transition-all">← Back</button>
                             <button type="submit" class="flex-[2] bg-nl-green text-nl-navy h-[64px] rounded-xl font-black text-sm uppercase tracking-widest hover:shadow-[0_0_30px_rgba(56,217,138,0.4)] transition-all">Get My Report →</button>
                         </div>
@@ -707,7 +712,7 @@
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                alert('Connection error. Please try again or email info@newlens.uk');
+                document.getElementById('submission-error').classList.remove('hidden');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Get My Report →';
             }
